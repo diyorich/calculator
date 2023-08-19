@@ -30,10 +30,12 @@ func run() error {
 				break
 			}
 
-			err := handlers.Handle(input)
+			answer, err := handlers.Handle(input)
 
 			if err != nil {
 				log.Println(err)
+			} else {
+				fmt.Printf("Answer is %v \n", answer)
 			}
 		}
 	}

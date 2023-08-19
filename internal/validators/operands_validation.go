@@ -1,6 +1,7 @@
 package validators
 
 import (
+	"calculator/pkg/converter"
 	"fmt"
 	"strconv"
 	"strings"
@@ -13,15 +14,40 @@ func ValidateOperands(operands []string) error {
 
 	//проверка что оба операнда римские или арабские
 	if !isHomogenous(operands) {
-		return fmt.Errorf("Both operands must be or arabic or Roman numerals")
+		return fmt.Errorf("Operands must be pair of Romans or pair of Numberals")
+	}
+
+	if !isAllowedRangeOfNumber(operands) {
+		return fmt.Errorf("calculator accepts number in range [1:10] ")
 	}
 
 	return nil
 }
 
+func isAllowedRangeOfNumber(operands []string) bool {
+	var formatted int
+	for _, operand := range operands {
+		if IsRomanNumeral(operand) {
+			fmt.Println("LESSGO")
+			formatted, _ = converter.RomanToInt(operand)
+			fmt.Println(formatted)
+		} else {
+			formatted, _ = strconv.Atoi(operand)
+		}
+
+		if formatted > 10 || formatted < 1 {
+			fmt.Println("THIS IS FORMATTED")
+			fmt.Println(formatted)
+			return false
+		}
+	}
+
+	return true
+}
+
 func isAllowedOperands(operands []string) bool {
 	for _, operand := range operands {
-		if isRomanNumeral(operand) || isStringInt(operand) {
+		if IsRomanNumeral(operand) || isStringInt(operand) {
 			continue
 		}
 
@@ -38,7 +64,7 @@ func isHomogenous(operands []string) bool {
 
 	//todo: refactor
 	for _, operand := range operands {
-		if isRomanNumeral(operand) {
+		if IsRomanNumeral(operand) {
 			roman += 1
 			continue
 		}
@@ -56,7 +82,7 @@ func isHomogenous(operands []string) bool {
 	return true
 }
 
-func isRomanNumeral(s string) bool {
+func IsRomanNumeral(s string) bool {
 	var romanNumerals = map[string]int{
 		"I": 1, "IV": 4, "V": 5, "IX": 9,
 		"X": 10, "XL": 40, "L": 50, "XC": 90,
