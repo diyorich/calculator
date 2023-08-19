@@ -6,7 +6,7 @@ import (
 
 func ValidateOperator(operator string) error {
 	if !operatorExist(operator) {
-		return fmt.Errorf("operation %s does not exist", operator)
+		return fmt.Errorf("operation \"%s\" does not exist", operator)
 	}
 
 	return nil

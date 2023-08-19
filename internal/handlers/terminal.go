@@ -18,5 +18,10 @@ func Handle(operation string) error {
 		return err
 	}
 
+	err = validators.ValidateOperands(operationElems)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
