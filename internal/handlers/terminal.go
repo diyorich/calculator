@@ -6,8 +6,6 @@ import (
 	"calculator/pkg/converter"
 	"fmt"
 	"os"
-	"os/exec"
-	"runtime"
 	"strconv"
 	"strings"
 )
@@ -21,17 +19,27 @@ var (
 func Handle(operation string) (interface{}, error) {
 	//process and initialize operation
 	operationElems := strings.Split(operation, " ")
+
+	if len(operationElems) != 3 {
+		fmt.Println("Not enough arguments or operands.")
+		os.Exit(1)
+	}
+
 	operator := operationElems[OperatorPosition]
 	operationElems = append(operationElems[:OperatorPosition], operationElems[OperatorPosition+1:]...)
 
 	err := validators.ValidateOperator(operator)
 	if err != nil {
-		return nil, err
+		fmt.Println(err)
+		os.Exit(1)
 	}
 
 	err = validators.ValidateOperands(operationElems)
 	if err != nil {
-		return nil, err
+		fmt.Println(err)
+
+		//closing program on any error which can occur
+		os.Exit(1)
 	}
 
 	var operands []int
@@ -57,14 +65,4 @@ func Handle(operation string) (interface{}, error) {
 	}
 
 	return answer, nil
-}
-
-func ClearTerminal() {
-	if runtime.GOOS == "windows" {
-		cmd := exec.Command("cmd", "/c", "cls")
-		cmd.Stdout = os.Stdout
-		cmd.Run()
-	} else {
-		fmt.Print("\033[H\033[2J")
-	}
 }

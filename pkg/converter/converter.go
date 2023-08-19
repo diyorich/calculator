@@ -76,11 +76,11 @@ func IntToRoman(num int) string {
 func AnswerToRoman(arg calculator.Answer) (string, error) {
 	var result strings.Builder
 
-	if intValue, ok := arg.(int); ok {
+	if intValue, ok := arg.(int); ok && intValue > 0 {
 		romanNumeral := IntToRoman(intValue)
 		return romanNumeral, nil
 	} else {
-		fmt.Printf("calculation result is %v, roman numerals do not have decimals and negative numbers", arg)
+		fmt.Printf("calculation result is %v, roman numerals do not have decimals and negative numbers\n", arg)
 		return "", errors.New("could not convert result to roman numerals")
 	}
 

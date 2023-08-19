@@ -31,7 +31,6 @@ func run() error {
 
 			answer, err := handlers.Handle(input)
 
-			handlers.ClearTerminal()
 			if err != nil {
 				log.Println(err)
 			} else {

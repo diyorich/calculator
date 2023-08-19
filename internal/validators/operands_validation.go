@@ -3,18 +3,32 @@ package validators
 import (
 	"calculator/pkg/converter"
 	"fmt"
+	"os"
 	"strconv"
 	"strings"
 )
 
 func ValidateOperands(operands []string) error {
+	if len(operands) < 0 {
+		return fmt.Errorf("amount of operands must be more than 1")
+	}
+
+	if len(operands) == 1 {
+		return fmt.Errorf("amount of operands must be more than 1")
+	}
+
+	if len(operands) > 2 {
+		return fmt.Errorf("amount of operands must be 2")
+	}
+
 	if !isAllowedOperands(operands) {
 		return fmt.Errorf("check operands, only allowed pair of Arabic or pair of Roman numerals")
 	}
 
 	//проверка что оба операнда римские или арабские
 	if !isHomogenous(operands) {
-		return fmt.Errorf("operands must be pair of Romans or pair of Numerals")
+		fmt.Println("operands must be pair of Romans or pair of Numerals")
+		os.Exit(1)
 	}
 
 	if !isAllowedRangeOfNumber(operands) {

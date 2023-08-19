@@ -13,7 +13,7 @@ func Calculate(operands []int, operator string) (Answer, error) {
 	case "*":
 		answer = operands[0] * operands[1]
 	case "/":
-		answer = float32(operands[0]) / float32(operands[1])
+		answer = operands[0] / operands[1]
 	}
 
 	return answer, nil

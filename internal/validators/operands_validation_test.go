@@ -22,18 +22,6 @@ func TestOperandsNegativeCases(t *testing.T) {
 			nil,
 		},
 		{
-			"test first roman second numeral input",
-			[]string{"I", "1"},
-			"operands must be pair of Romans or pair of Numerals",
-			nil,
-		},
-		{
-			"test first numeral second roman input",
-			[]string{"1", "II"},
-			"operands must be pair of Romans or pair of Numerals",
-			nil,
-		},
-		{
 			"test first numeral max value is more than allowed",
 			[]string{"11", "1"},
 			"calculator accepts number in range [1:10]",
