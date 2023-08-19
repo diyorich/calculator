@@ -4,6 +4,10 @@ import (
 	"calculator/internal/calculator"
 	"calculator/internal/validators"
 	"calculator/pkg/converter"
+	"fmt"
+	"os"
+	"os/exec"
+	"runtime"
 	"strconv"
 	"strings"
 )
@@ -49,10 +53,18 @@ func Handle(operation string) (interface{}, error) {
 	answer, _ := calculator.Calculate(operands, operator)
 
 	if isRoman {
-		return converter.IntToRoman(answer), nil
+		return converter.AnswerToRoman(answer)
 	}
 
-	//todo return calculated data
-
 	return answer, nil
+}
+
+func ClearTerminal() {
+	if runtime.GOOS == "windows" {
+		cmd := exec.Command("cmd", "/c", "cls")
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	} else {
+		fmt.Print("\033[H\033[2J")
+	}
 }

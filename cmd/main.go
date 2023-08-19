@@ -20,8 +20,7 @@ func run() error {
 	fmt.Println("Calculator application started...")
 
 	for {
-		fmt.Println("Input desired operation. Example: \n1 + 2 \nI * VI")
-		fmt.Println("Input:")
+		fmt.Println("Input desired operation. Example: \n1 + 2 \nI * VI\nType 'exit' to close program")
 		if scanner.Scan() {
 			input := scanner.Text()
 
@@ -35,7 +34,8 @@ func run() error {
 			if err != nil {
 				log.Println(err)
 			} else {
-				fmt.Printf("Answer is %v \n", answer)
+				handlers.ClearTerminal()
+				fmt.Printf("\n\nAnswer is %v \n\n", answer)
 			}
 		}
 	}

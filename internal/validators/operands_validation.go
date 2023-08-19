@@ -28,16 +28,12 @@ func isAllowedRangeOfNumber(operands []string) bool {
 	var formatted int
 	for _, operand := range operands {
 		if IsRomanNumeral(operand) {
-			fmt.Println("LESSGO")
 			formatted, _ = converter.RomanToInt(operand)
-			fmt.Println(formatted)
 		} else {
 			formatted, _ = strconv.Atoi(operand)
 		}
 
 		if formatted > 10 || formatted < 1 {
-			fmt.Println("THIS IS FORMATTED")
-			fmt.Println(formatted)
 			return false
 		}
 	}

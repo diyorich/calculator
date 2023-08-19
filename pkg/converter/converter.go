@@ -1,6 +1,8 @@
 package converter
 
 import (
+	"calculator/internal/calculator"
+	"errors"
 	"fmt"
 	"strings"
 )
@@ -69,4 +71,18 @@ func IntToRoman(num int) string {
 	}
 
 	return result.String()
+}
+
+func AnswerToRoman(arg calculator.Answer) (string, error) {
+	var result strings.Builder
+
+	if intValue, ok := arg.(int); ok {
+		romanNumeral := IntToRoman(intValue)
+		return romanNumeral, nil
+	} else {
+		fmt.Printf("calculation result is %v, roman numerals do not have decimals and negative numbers", arg)
+		return "", errors.New("could not convert result to roman numerals")
+	}
+
+	return result.String(), nil
 }
