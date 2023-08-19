@@ -9,16 +9,16 @@ import (
 
 func ValidateOperands(operands []string) error {
 	if !isAllowedOperands(operands) {
-		return fmt.Errorf("Check operands, only allowed arabic and rome numerals")
+		return fmt.Errorf("check operands, only allowed pair of Arabic or pair of Roman numerals")
 	}
 
 	//проверка что оба операнда римские или арабские
 	if !isHomogenous(operands) {
-		return fmt.Errorf("Operands must be pair of Romans or pair of Numberals")
+		return fmt.Errorf("operands must be pair of Romans or pair of Numerals")
 	}
 
 	if !isAllowedRangeOfNumber(operands) {
-		return fmt.Errorf("calculator accepts number in range [1:10] ")
+		return fmt.Errorf("calculator accepts number in range [1:10]")
 	}
 
 	return nil
