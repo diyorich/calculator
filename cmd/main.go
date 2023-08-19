@@ -26,15 +26,15 @@ func run() error {
 
 			if strings.ToLower(input) == "exit" {
 				fmt.Println("Exiting...")
-				break
+				os.Exit(1)
 			}
 
 			answer, err := handlers.Handle(input)
 
+			handlers.ClearTerminal()
 			if err != nil {
 				log.Println(err)
 			} else {
-				handlers.ClearTerminal()
 				fmt.Printf("\n\nAnswer is %v \n\n", answer)
 			}
 		}
